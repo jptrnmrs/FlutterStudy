@@ -19,22 +19,13 @@ class ShoppingcartBody extends StatelessWidget {
         child: Column(
           children: [
             _buildBodyNameAndPrice("Urban Soft AL 10.0", 69.9),
-            SizedBox(
-              height: 10,
-            ),
-            _buildBodyRatingAndReviewCount(4.5, 26),
-            SizedBox(
-              height: 10,
-            ),
-            _buildBodyColorOptions(
-                [Colors.black, Colors.blue, Colors.red, Colors.orangeAccent]),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 10,),
+            _buildBodyRatingAndReviewCount(4, 26),
+            SizedBox(height: 10,),
+            _buildBodyColorOptions([Colors.black,Colors.blue, Colors.red,Colors.orangeAccent]),
+            SizedBox(height: 20,),
             _buildBodybutton(),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20,),
           ],
         ),
       ),
@@ -59,19 +50,22 @@ class ShoppingcartBody extends StatelessWidget {
   }
 
   // 2. 별점 리뷰 카운트
-  Widget _buildBodyRatingAndReviewCount(var rating, int review) {
+  Widget _buildBodyRatingAndReviewCount(int rating, int review) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            ...List.generate(
-              5,
-              (index) => Icon(
+            for (int i = 1; i <= rating; i++)
+              Icon(
                 Icons.star,
-                color: (rating >= index + 1) ? Colors.orangeAccent : Colors.grey,
+                color: Colors.orangeAccent,
               ),
-            )
+            for (int i = 1; i <= 5 - rating; i++)
+              Icon(
+                Icons.star,
+                color: Colors.grey,
+              ),
           ],
         ),
         Row(
@@ -93,12 +87,11 @@ class ShoppingcartBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Color Options"),
-        SizedBox(
-          height: 5,
-        ),
+        SizedBox(height: 5,),
         Row(
           children: [
-            for (var mColor in mColors) _buildColorOption(mColor),
+            for(var mColor in mColors)
+            _buildColorOption(mColor),
           ],
         ),
       ],
@@ -147,12 +140,10 @@ class ShoppingcartBody extends StatelessWidget {
         width: 500,
         height: 50,
         decoration: BoxDecoration(
-            color: kAccentColor, borderRadius: BorderRadius.circular(22)),
-        child: Center(
-            child: Text(
-          "Add to Cart",
-          style: TextStyle(color: kPrimaryColor, fontSize: 16),
-        )),
+          color: kAccentColor,
+          borderRadius: BorderRadius.circular(22)
+        ),
+        child: Center(child: Text("Add to Cart", style: TextStyle(color: kPrimaryColor, fontSize: 16),)),
       ),
     );
   }
