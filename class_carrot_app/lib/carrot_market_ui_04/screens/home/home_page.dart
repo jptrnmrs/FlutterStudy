@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../models/product.dart';
@@ -10,13 +9,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: _appBar(),
       // body: ListView.separated(itemBuilder: itemBuilder, separatorBuilder: separatorBuilder, itemCount: itemCount),
-      body: ListView(
-        children: [
-          ProductItem(product: productList[0]),
-        ],
+      body: ListView.separated(
+        itemCount: productList.length,
+        itemBuilder: (context, index) {
+          return ProductItem(product: productList[index]);
+        },
+        separatorBuilder: (context, index) => const Divider(
+          thickness: 0.5,
+          color: Colors.grey,
+          indent: 10.0,
+          endIndent: 10.0,
+        ),
       ),
+    );
+  }
+  
+  AppBar _appBar(){
+    return AppBar(
     );
   }
 }

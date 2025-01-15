@@ -24,8 +24,9 @@ class ProductItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
+          const SizedBox(width: 16.0,),
           // 상품 설명
-          ProductDetail()
+          ProductDetail(product: product,)
         ],
       ),
     );
